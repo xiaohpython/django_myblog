@@ -1,0 +1,62 @@
+{% extends "base-layout.html" %}
+
+{% block title %}关于[{{ CFG.SITE_INFO.WHOAMI }}] - {{ block.super }}{% endblock %}
+
+{% block head_css %}
+    {{ block.super }}
+    <style type="text/css">
+        #page-main {
+            min-height: 100px;
+            margin: 0 auto;
+            max-width: 38em;
+            text-align: left;
+        }
+        #page-main dd {
+            text-indent: 2em;
+            /*text-decoration: underline dotted #fa1;*/
+            text-shadow: #a1b3f3 1px 2px 8px;
+        }
+        #page-main dd + dt {
+            margin-top: 0.39em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12 col-md-12 text-center">
+            <div id="page-main">
+                <dl>
+                    <dt>昵称:</dt>
+                    <dd>xiaoh</dd>
+                    <dt>
+                        Github
+                    </dt>
+                    <dd>
+                        <a href="https://github.com/xiaohpython" target="_blank">xiaoh</a>
+                    </dd>
+                    <dt>最喜欢的编程语言:</dt>
+                    <dd>
+                        <a href="https://www.python.org/"  target="_blank">Python</a>
+                    </dd>
+                    <dt>还会点儿啥:</dt>
+                    <dd>
+                        <a href="https://docs.djangoproject.com/zh-hans/2.1/" target="_blank">django ~</a>
+                    </dd>
+                    <dd>mysql ~</dd>
+                    <dd>scrapy ~</dd>
+                    <dd>mongedb ~</dd>
+                    <dd>git ~</dd>
+                    <dd>
+                        <a href="http://pandas.pydata.org/pandas-docs/stable/" target="_blank">numpy、pandas ~</a>
+                    </dd>
+                    <dd>docker ~</dd>
+                    <dt>最常用的操作系统:</dt>
+                    <dd>
+                        <a href="https://www.ubuntu.com/" target="_blank">Ubuntu</a>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+{% endblock %}

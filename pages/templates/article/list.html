@@ -1,0 +1,88 @@
+{% extends "base-layout.html" %}
+{% load static %}
+
+{% block title %}博文列表 - {{ block.super }}{% endblock %}
+
+{% block head_css %}
+    <link href="{% static 'css/list.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content_left %}
+    <ul class="list-group blog-list-panel">
+        {% for article in article_list %}
+            <li class="list-group-item">
+                <h4 class="list-group-item-heading">
+                    <a href="{% url 'pages:detail' article.id %}">{{ article.title }}</a>
+                    {% if user.is_authenticated %}
+                    <span class="ico-btn-edit">
+                        <a href="{% url 'admin:pages_article_change' article.id %}" title="编辑">
+                            <i class="far fa-edit"></i>
+                        </a>
+                    </span>
+                    {% endif %}
+                </h4>
+                <p class="list-group-item-text">{{ article.abstract }}</p>
+                <div class="list-group-item-footing">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            {% for tag in article.tags.all %}
+                                <a href="{% url 'pages:search' %}?tag={{ tag.id }}" class="tag-item">
+                                    <span class="tag-wrapper"><i class="fas fa-tag"></i>{{ tag.name }}</span>
+                                </a>
+                            {% empty %}
+                                <span class="text-muted">没有添加标签</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6 text-right">
+                            <span class="text-muted">{{ article.upate_time }}</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <li class="list-group-item">
+                <p class="list-group-item-text">作者懒到家了，没有写文章</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="blog-list-pagination">
+        <nav aria-label="blog-list-pagination">
+            <ul class="pager">
+                <li class="previous disabled">
+                    <a href="#">
+                        <span aria-hidden="true">&larr;</span> 上一页
+                    </a>
+                </li>
+                <li class="next">
+                    <a href="#">
+                        下一页 <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block content_right %}
+    <div class="panel panel-default tags-panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">标签</h3>
+        </div>
+        <div class="panel-body">
+            {% for tag in tag_list %}
+                <a href="{% url 'pages:search' %}?tag={{ tag.id }}" class="tag-item">
+                    <span class="tag-text">{{ tag.name }}</span>
+                    <span class="badge">{{ tag.articles.count }}</span>
+                </a>
+            {% empty %}
+                <span class="tag-text">测试</span>
+            {% endfor %}
+      </div>
+    </div>
+{% endblock %}
+
+
+
+
+    
+            
